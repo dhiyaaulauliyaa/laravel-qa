@@ -41,9 +41,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function questions(){
+    public function questions()
+    {
         return $this->hasMany(Question::class);
     }
 
-    
+    public function getUrlAttribute()
+    {
+        // return route('us.show', $this->id);
+        return '#';
+    }
 }
