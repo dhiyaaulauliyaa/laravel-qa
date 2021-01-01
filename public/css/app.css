@@ -10903,3 +10903,43 @@ a.text-dark:focus {
   }
 }
 
+.counters {
+  margin-right: 2em;
+  font-size: 11px;
+  text-align: center;
+}
+
+.counters strong {
+  display: block;
+  font-size: 2em;
+}
+
+.counters .vote,
+.counters .status {
+  width: 6em;
+  height: 6em;
+  align-items: center;
+}
+
+.counters .status.unanswered {
+  border: none;
+}
+
+.counters .status.answered {
+  padding-top: 0.3em;
+  border: 1px solid #38c172;
+  border-radius: 5px;
+  color: #38c172;
+}
+
+.counters .status.answered-accepted {
+  padding-top: 0.3em;
+  background: #38c172;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.counters .view {
+  margin-top: 1em;
+}
+
