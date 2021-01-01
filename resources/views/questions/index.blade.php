@@ -37,9 +37,14 @@
 
                         {{-- Questions --}}
                         <div class="flex-fill media-body">
-                            <h3 class="mt-0">
-                                <a href="{{ $question->url }}">{{  $question->title }}</a>
-                            </h3>
+                            <div class="d-flex">
+                                <h3 class="mt-0">
+                                    <a href="{{ $question->url }}">{{  $question->title }}</a>
+                                </h3>
+                                <div class="ml-auto">
+                                    <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-outline-info">Edit</a>
+                                </div>
+                            </div>
                             <p>Asked by
                                 <a href="{{ $question->user->url }}">{{ $question->user->name }} </a>
                                 • {{ $question->created_date }}
@@ -49,7 +54,7 @@
                     </div>
                     <hr>
                     @endforeach
-                    
+
                     {{-- Pagination --}}
                     {{ $questions->links('pagination::bootstrap-4') }}
                 </div>
