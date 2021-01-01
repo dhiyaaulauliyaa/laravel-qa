@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Gate::define('update-question', function ($user, $question) {
+            return $user->id === $question->user_id;
+        });
+        
+        Gate::define('delete-question', function ($user, $question) {
+            return $user->id === $question->user_id;
+        });
     }
 }
