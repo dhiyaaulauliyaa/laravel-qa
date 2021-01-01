@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
 use App\Models\Question;
+
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -62,6 +64,9 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
+        if (Gate::denies('update-question', $question)) {
+            return abort('403', 'Not allowed');
+        }
         return view("questions.edit", compact('question'));
     }
 
@@ -86,7 +91,11 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
-        $question->delete();
-        return redirect('/questions')->with('success', "Your question has been deleted.");
+        if (Gate::denies('update-question', $question)) {
+            return abort('403', 'Not allowed');
+        } else {
+            $question->delete();
+            return redirect('/questions')->with('success', "Your question has been deleted.");
+        }
     }
 }
