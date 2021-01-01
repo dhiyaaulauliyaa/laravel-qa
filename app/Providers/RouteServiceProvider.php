@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Question;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -46,6 +48,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+        });
+
+        Route::bind('slug', function ($slug) {
+            return Question::where('slug', $slug)->first() ?? abort('404');
         });
     }
 
