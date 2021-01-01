@@ -10943,3 +10943,7 @@ a.text-dark:focus {
   margin-top: 1em;
 }
 
+form.form-delete {
+  display: inline;
+}
+
