@@ -34,4 +34,9 @@ class Answer extends Model
         $markdown = new CommonMarkConverter(['allow_unsafe_links' => false]);
         return $markdown->convertToHtml($this->body);
     }
+
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
 }
