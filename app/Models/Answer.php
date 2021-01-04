@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use League\CommonMark\CommonMarkConverter;
+
 class Answer extends Model
 {
     use HasFactory;
@@ -17,5 +19,11 @@ class Answer extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getBodyHtmlAttribute()
+    {
+        $markdown = new CommonMarkConverter(['allow_unsafe_links' => false]);
+        return $markdown->convertToHtml($this->body);
     }
 }
