@@ -6,56 +6,103 @@
         {{-- Question --}}
         <div class="col-md-12">
             <div class="card">
-                {{-- Header --}}
-                <div class="card-header d-flex">
-                    <h3 class="mr-auto">{{ $question->title }} </h3>
-                    <div class="ml-auto">
-                        <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">Back to All
-                            Questions</a>
-                    </div>
-                </div>
-
-                {{-- Question Body --}}
                 <div class="card-body">
-                    {!! $question->body_html !!}
-                </div>
-            </div>
-        </div>
-
-        {{-- Answers --}}
-        <div class="col-md-12 mt-4">
-            <div class="card">
-                <div class="card-body">
-                    {{-- Header --}}
                     <div class="card-title">
-                        <h3>
-                            {{ $question->answers_count . Str::plural(' Answer', $question->answers_count) }}</h3>
-                        </h3>
+                        <div class="d-flex flex-row align-items-center">
+                            <h1 class="mr-2">{{ $question->title }}</h1>
+                            <div class="ml-auto">
+                                <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">Back to all
+                                    Questions</a>
+                            </div>
+                        </div>
                     </div>
+
                     <hr>
 
-                    {{-- Answers Body --}}
-                    @foreach ($question->answers as $answer)
                     <div class="media">
+                        <div class="d-flex flex-column vote-controls">
+                            <a title="This question is useful" class="vote-up">
+                                <i class="fa fa-caret-up fa-3x"></i>
+                            </a>
+                            <span class="votes-count">1230</span>
+                            <a title="This question is not useful" class="vote-down off">
+                                <i class="fa fa-caret-down fa-3x"></i>
+                            </a>
+                            <a title="Click to mark as favorite question (Click again to undo)"
+                                class="favorite mt-2 favorited">
+                                <i class="fa fa-star fa-2x"></i>
+                                <span class="favorites-count">123</span>
+                            </a>
+                        </div>
                         <div class="media-body">
-                            {!! $answer->body_html !!}
-                            <div class="float-right">
-                                <span class="text-muted">Answered {{ $answer->created_date }}</span>
-                                <div class="media mt-2">
-                                    <a href="{{ $answer->user->url }}" class="pr-2">
-                                        <img src="{{ $answer->user->avatar }}">
+                            {!! $question->body_html !!}
+
+                            <div class="float-left">
+                                <hr>
+                                <span class="text-muted ">Answered {{ $question->created_date }}</span>
+                                <div class="media mt-1">
+                                    <a href="{{ $question->user->url }}" class="pr-2">
+                                        <img src="{{ $question->user->avatar }}">
                                     </a>
                                     <div class="media-body mt-1">
-                                        <a href="{{ $answer->user->url }}">{{ $answer->user->name }}</a>
+                                        <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-    @endsection
+
+    {{-- Answers --}}
+    <div class="col-md-12 mt-4">
+        <div class="card">
+            <div class="card-body">
+                {{-- Header --}}
+                <div class="card-title">
+                    <h3>
+                        {{ $question->answers_count . Str::plural(' Answer', $question->answers_count) }}</h3>
+                    </h3>
+                </div>
+                <hr>
+
+                {{-- Answers Body --}}
+                @foreach ($question->answers as $answer)
+                <div class="media">
+                    <div class="d-flex flex-column vote-controls">
+                        <a title="This answer is useful" class="vote-up">
+                            <i class="fa fa-caret-up fa-3x"></i>
+                        </a>
+                        <span class="votes-count">1230</span>
+                        <a title="This answer is not useful" class="vote-down off">
+                            <i class="fa fa-caret-down fa-3x"></i>
+                        </a>
+                        <a title="Mark this answer as best answer" class="vote-accepted mt-2">
+                            <i class="fa fa-check fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        {!! $answer->body_html !!}
+                        <div class="float-left margin-top:-0.5em">
+                            <hr>
+                            <span class="text-muted">Answered {{ $answer->created_date }}</span>
+                            <div class="media mt-2">
+                                <a href="{{ $answer->user->url }}" class="pr-2">
+                                    <img src="{{ $answer->user->avatar }}">
+                                </a>
+                                <div class="media-body mt-1">
+                                    <a href="{{ $answer->user->url }}">{{ $answer->user->name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
