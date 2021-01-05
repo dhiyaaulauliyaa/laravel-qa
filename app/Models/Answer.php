@@ -11,6 +11,8 @@ class Answer extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['body', 'user_id'];
+
     public static function boot()
     {
         parent::boot();
