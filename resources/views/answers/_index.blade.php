@@ -9,9 +9,13 @@
             </div>
             <hr>
 
+            {{-- Flash message --}}
+            @include('layouts._messages')
+
             {{-- Answers Body --}}
             @foreach ($answers as $answer)
             <div class="media">
+
                 <div class="d-flex flex-column vote-controls">
                     <a title="This answer is useful" class="vote-up">
                         <i class="fa fa-caret-up fa-3x"></i>
@@ -25,6 +29,24 @@
                     </a>
                 </div>
                 <div class="media-body">
+                    <div class="ml-auto">
+                        {{-- Edit Answer --}}
+                        @can('update', $answer)
+                        <a href="{{ route('questions.answers.update', [$answer->question_id, $answer->id]) }}"
+                            class="btn btn-md btn-outline-info">Edit</a>
+
+                        @endcan
+
+                        {{-- Delete Answer --}}
+                        @can('delete', $answer)
+                        <form class="form-delete" method="post"
+                            action="{{ route('questions.answers.destroy', [$answer->question_id, $answer->id]) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-md btn-outline-danger"
+                                onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                        @endcan
+                    </div>
                     {!! $answer->body_html !!}
                     <div class="float-left margin-top:-0.5em">
                         <hr>
