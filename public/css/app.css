@@ -10983,6 +10983,10 @@ form.form-delete {
 }
 
 .vote-controls a.vote-accepted {
-  color: #38c172;
+  color: #38c172 !important;
+}
+
+.vote-controls a.checklist {
+  color: #fff;
 }
 
