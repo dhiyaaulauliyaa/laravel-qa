@@ -75,7 +75,6 @@ class AnswersController extends Controller
     {
         $this->authorize('delete', $answer);
         $answer->delete();
-        $question->decrement('answers_count');
         
         return redirect()->route('questions.show', $question->slug)->with('success', "Your question has been deleted.");
     }
