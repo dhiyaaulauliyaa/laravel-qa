@@ -92,7 +92,13 @@ form.form-delete {
         }
 
         &.vote-accepted {
-            color: $green;
+            color: $green !important;
         }
+
+        &.checklist {
+            color: $white;
+        }
+
+        
     }
 }
